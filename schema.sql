@@ -5,28 +5,28 @@ USE Employee_DB;
 
 CREATE TABLE department (
   id INT NOT NULL AUTO_INCREMENT,
-  department_name VARCHAR(255) NOT NULL,
+  department_name VARCHAR(30) NOT NULL,
   PRIMARY KEY (id)
 
 );
 
 CREATE TABLE role (
   id INT NOT NULL AUTO_INCREMENT,
-  title VARCHAR(255) NOT NULL,
+  title VARCHAR(30) NOT NULL,
   salary DECIMAL NOT NULL,
   department_id INT NOT NULL,
-  FOREIGN KEY (department_id) REFERENCES department(id),
+  CONSTRAINT FOREIGN KEY (department_id) REFERENCES department(id),
   PRIMARY KEY (id)
 );
 
 CREATE TABLE employee (
   id INT NOT NULL AUTO_INCREMENT,
-  first_name VARCHAR(255) NOT NULL,
-  last_name VARCHAR(255) NOT NULL,
+  first_name VARCHAR(30) NOT NULL,
+  last_name VARCHAR(30) NOT NULL,
   role_id INT NOT NULL,
-  FOREIGN KEY(role_id) REFERENCES role(id),
+  CONSTRAINT FOREIGN KEY (role_id) REFERENCES role(id),
   manager_id INT,
-  FOREIGN KEY (manager_id) REFERENCES employee(id),
+  CONSTRAINT FOREIGN KEY (manager_id) REFERENCES employee(id),
   PRIMARY KEY (id)
 );
 
@@ -62,17 +62,17 @@ VALUES('Manager', 125000, 3);
 
 SELECT * FROM role;
 
-INSERT INTO employee (first_name, last_name, role_id)
-VALUES ('Bob', 'Marley', 420); 
-INSERT INTO employee (first_name, last_name, role_id)
-VALUES ('Stephen', 'Curry', 333); 
-INSERT INTO employee (first_name, last_name, role_id)
-VALUES ('Michael', 'Meyers', 187); 
-INSERT INTO employee (first_name, last_name, role_id)
-VALUES ('Albert', 'Einstein', 314); 
-INSERT INTO employee (first_name, last_name, role_id)
-VALUES ('Rick', 'Sanchez', 1); 
-INSERT INTO employee (first_name, last_name, role_id)
-VALUES ('Morty', 'Smith', 2); 
+-- INSERT INTO employee (first_name, last_name, role_id)
+-- VALUES ('Bob', 'Marley', 420); 
+-- INSERT INTO employee (first_name, last_name, role_id)
+-- VALUES ('Stephen', 'Curry', 333); 
+-- INSERT INTO employee (first_name, last_name, role_id)
+-- VALUES ('Michael', 'Meyers', 187); 
+-- INSERT INTO employee (first_name, last_name, role_id)
+-- VALUES ('Albert', 'Einstein', 314); 
+-- INSERT INTO employee (first_name, last_name, role_id)
+-- VALUES ('Rick', 'Sanchez', 1); 
+-- INSERT INTO employee (first_name, last_name, role_id)
+-- VALUES ('Morty', 'Smith', 2); 
 
-SELECT * FROM employee;
+-- SELECT * FROM employee;
