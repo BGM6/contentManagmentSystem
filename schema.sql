@@ -1,7 +1,10 @@
-DROP DATABASE if EXISTS Employee_DB;
-CREATE DATABASE Employee_DB;
+-- SET FOREIGN_KEY_CHECKS=0;
 
-USE Employee_DB;
+
+DROP DATABASE if EXISTS employee_db;
+CREATE DATABASE employee_db;
+
+USE employee_db;
 
 CREATE TABLE department (
   id INT NOT NULL AUTO_INCREMENT,
@@ -15,7 +18,7 @@ CREATE TABLE role (
   title VARCHAR(30) NOT NULL,
   salary DECIMAL NOT NULL,
   department_id INT NOT NULL,
-  CONSTRAINT FOREIGN KEY (department_id) REFERENCES department(id),
+  CONSTRAINT FOREIGN KEY(department_id) REFERENCES department(id),
   PRIMARY KEY (id)
 );
 
@@ -24,14 +27,14 @@ CREATE TABLE employee (
   first_name VARCHAR(30) NOT NULL,
   last_name VARCHAR(30) NOT NULL,
   role_id INT NOT NULL,
-  CONSTRAINT FOREIGN KEY (role_id) REFERENCES role(id),
   manager_id INT,
-  CONSTRAINT FOREIGN KEY (manager_id) REFERENCES employee(id),
+  FOREIGN KEY(role_id) REFERENCES role(id),
+  FOREIGN KEY(manager_id) REFERENCES employee(id),
   PRIMARY KEY (id)
 );
 
 SELECT * FROM employee;
-SELECT * From role;
+SELECT * FROM role;
 SELECT * FROM department;
 
 INSERT INTO department (department_name)
@@ -62,17 +65,17 @@ VALUES('Manager', 125000, 3);
 
 SELECT * FROM role;
 
--- INSERT INTO employee (first_name, last_name, role_id)
--- VALUES ('Bob', 'Marley', 420); 
--- INSERT INTO employee (first_name, last_name, role_id)
--- VALUES ('Stephen', 'Curry', 333); 
--- INSERT INTO employee (first_name, last_name, role_id)
--- VALUES ('Michael', 'Meyers', 187); 
--- INSERT INTO employee (first_name, last_name, role_id)
--- VALUES ('Albert', 'Einstein', 314); 
--- INSERT INTO employee (first_name, last_name, role_id)
--- VALUES ('Rick', 'Sanchez', 1); 
--- INSERT INTO employee (first_name, last_name, role_id)
--- VALUES ('Morty', 'Smith', 2); 
+INSERT INTO employee (first_name, last_name, role_id)
+VALUES ('Bob', 'Marley', 420); 
+INSERT INTO employee (first_name, last_name, role_id)
+VALUES ('Stephen', 'Curry', 333); 
+INSERT INTO employee (first_name, last_name, role_id)
+VALUES ('Michael', 'Meyers', 187); 
+INSERT INTO employee (first_name, last_name, role_id)
+VALUES ('Albert', 'Einstein', 314); 
+INSERT INTO employee (first_name, last_name, role_id)
+VALUES ('Rick', 'Sanchez', 1); 
+INSERT INTO employee (first_name, last_name, role_id)
+VALUES ('Morty', 'Smith', 2); 
 
--- SELECT * FROM employee;
+SELECT * FROM employee;

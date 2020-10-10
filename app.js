@@ -50,7 +50,7 @@ const runSearch = () => {
   inquirer.prompt({
     name: 'userChoice',
     type: 'list',
-    message: 'Select an option',
+    message: 'What would you like to do?',
     choices: userOptions,
   })
     .then((answer) => {
@@ -64,7 +64,7 @@ const runSearch = () => {
           break;
 
         case userOptions[2]:
-          // view employee function
+          viewEmployees();
           break;
 
         case userOptions[3]:
@@ -78,23 +78,32 @@ const runSearch = () => {
     })
 }
 
-  const viewDepartments = () => {
-    const queryDepartment = 'SELECT * FROM department';
-    con.query(queryDepartment, (err, result) => {
-      if (err) throw err;
+const viewDepartments = () => {
+  const queryDepartment = 'SELECT * FROM department';
+  con.query(queryDepartment, (err, result) => {
+    if (err) throw err;
+    console.table(result);
+    runSearch();
+  })
+}
 
-      console.table(result);
-      runSearch();
-    })
-  }
+const viewRoles = () => {
+  const queryRoles = 'SELECT * FROM role';
+  con.query(queryRoles, (err, result) => {
+    if (err) throw err;
+    console.table(result);
+  })
+}
 
-  const viewRoles = () => {
-    const queryRoles = 'SELECT * FROM role';
-    con.query(queryRoles, (err, result) => {
-      if(err) throw err;
-      console.table(result);
-    })
-  }
+const viewEmployees = () => {
+  const queryEmployees = 'SELECT first_name, last_name, id, role_id, manager_id FROM employee';
+  con.query(queryEmployees, (err, result) => {
+    if (err) throw err;
+    console.table(result);
+    runSearch();
+  })
+
+}
 
 
 runSearch();
