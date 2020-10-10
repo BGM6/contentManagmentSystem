@@ -1,32 +1,81 @@
 DROP DATABASE if EXISTS Employee_DB;
-
 CREATE DATABASE Employee_DB;
 
 USE Employee_DB;
 
 -- Department Table
 CREATE TABLE department (
-  id INT auto_increment NOT NULL;
-  name VARCHAR(255) NOT NULL;
-  PRIMARY KEY(id);
+  id INT NOT NULL AUTO_INCREMENT,
+  department_name VARCHAR(255) NOT NULL,
+  PRIMARY KEY (id)
 
 );
 
 -- Roll Table
 CREATE TABLE role (
-  id INT auto_increment NOT NULL;
-  title VARCHAR(255) NOT NULL;
-  salary DECIMAL NOT NULL;
-  department_id INT NOT NULL;
-  PRIMARY KEY(id);
+  id INT NOT NULL AUTO_INCREMENT,
+  title VARCHAR(255) NOT NULL,
+  salary DECIMAL NOT NULL,
+  department_id INT NOT NULL,
+  FOREIGN KEY (department_id) REFERENCES department(id),
+  PRIMARY KEY (id)
 );
 
 -- Employee Table
 CREATE TABLE employee (
-  id INT auto_increment NOT NULL;
-  first_name VARCHAR(255) NOT NULL;
-  last_name VARCHAR(255) NOT NULL;
-  role_id INT NOT NULL;
-  manager_id INT NOT NULL;
-  PRIMARY KEY(id);
-)
+  id INT NOT NULL AUTO_INCREMENT,
+  first_name VARCHAR(255) NOT NULL,
+  last_name VARCHAR(255) NOT NULL,
+  role_id INT NOT NULL,
+  FOREIGN KEY(role_id) REFERENCES roll(id),
+  manager_id INT,
+  FOREIGN KEY (manager_id) REFERENCES employee(id),
+  PRIMARY KEY (id)
+);
+
+SELECT * FROM department;
+SELECT * From role;
+SELECT * FROM employee;
+
+INSERT INTO department (department_name)
+VALUES ('Sales')
+INSERT INTO department (department_name)
+VALUES ('QA')
+INSERT INTO department (department_name)
+VALUES ('Finance')
+INSERT INTO department (department_name)
+VALUES ('Engineering')
+INSERT INTO department (department_name)
+VALUES ('Manager')
+
+SELECT * FROM department;
+
+INSERT INTO role (title, salary, department_id)
+VALUES('Sales Leader', 50000, 1);
+INSERT INTO role (title, salary, department_id)
+VALUES('QA Team Member', 45000, 5);
+INSERT INTO role (title, salary, department_id)
+VALUES('Accountant', 47000, 3);
+INSERT INTO role (title, salary, department_id)
+VALUES('Senior Engineer', 100000, 2);
+INSERT INTO role (title, salary, department_id)
+VALUES('Junior Engineer', 70000, 4);
+INSERT INTO role (title, salary, department_id)
+VALUES('Manager', 125000, 3);
+
+SELECT * FROM role;
+
+INSERT INTO employee (first_name, last_name, role_id)
+VALUES ('Bob', 'Marley', 420); 
+INSERT INTO employee (first_name, last_name, role_id)
+VALUES ('Stephen', 'Curry', 333); 
+INSERT INTO employee (first_name, last_name, role_id)
+VALUES ('Michael', 'Meyers', 187); 
+INSERT INTO employee (first_name, last_name, role_id)
+VALUES ('Albert', 'Einstein', 314); 
+INSERT INTO employee (first_name, last_name, role_id)
+VALUES ('Rick', 'Sanchez', 1); 
+INSERT INTO employee (first_name, last_name, role_id)
+VALUES ('Morty', 'Smith', 2); 
+
+SELECT * FROM employee;
