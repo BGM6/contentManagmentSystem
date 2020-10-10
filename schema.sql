@@ -3,7 +3,6 @@ CREATE DATABASE Employee_DB;
 
 USE Employee_DB;
 
--- Department Table
 CREATE TABLE department (
   id INT NOT NULL AUTO_INCREMENT,
   department_name VARCHAR(255) NOT NULL,
@@ -11,7 +10,6 @@ CREATE TABLE department (
 
 );
 
--- Roll Table
 CREATE TABLE role (
   id INT NOT NULL AUTO_INCREMENT,
   title VARCHAR(255) NOT NULL,
@@ -21,7 +19,6 @@ CREATE TABLE role (
   PRIMARY KEY (id)
 );
 
--- Employee Table
 CREATE TABLE employee (
   id INT NOT NULL AUTO_INCREMENT,
   first_name VARCHAR(255) NOT NULL,
@@ -33,20 +30,20 @@ CREATE TABLE employee (
   PRIMARY KEY (id)
 );
 
-SELECT * FROM department;
-SELECT * From role;
 SELECT * FROM employee;
+SELECT * From role;
+SELECT * FROM department;
 
 INSERT INTO department (department_name)
-VALUES ('Sales')
+VALUES ('Sales');
 INSERT INTO department (department_name)
-VALUES ('QA')
+VALUES ('Quality Control');
 INSERT INTO department (department_name)
-VALUES ('Finance')
+VALUES ('Finance');
 INSERT INTO department (department_name)
-VALUES ('Engineering')
+VALUES ('Engineering');
 INSERT INTO department (department_name)
-VALUES ('Manager')
+VALUES ('Manager');
 
 SELECT * FROM department;
 
