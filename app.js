@@ -19,7 +19,7 @@ con.connect((err) => {
 });
 
 
-const options = [
+const userOptions = [
   'View Departments',
   'View Roles',
   'View Employee(s)',
@@ -51,30 +51,50 @@ const runSearch = () => {
     name: 'userChoice',
     type: 'list',
     message: 'Select an option',
-    choices: options,
+    choices: userOptions,
   })
     .then((answer) => {
       switch (answer.userChoice) {
-        case options[0]:
-          // run department function
+        case userOptions[0]:
+          viewDepartments()
           break;
 
-        case options[1]:
-          // view roles function
+        case userOptions[1]:
+          viewRoles();
           break;
 
-        case options[2]:
+        case userOptions[2]:
           // view employee function
           break;
 
-        case options[3]:
+        case userOptions[3]:
           // run update employee function
           break;
 
-        case options[4]:
-          connection.end();
+        case userOptions[4]:
+          con.end();
           break
       }
     })
 }
 
+  const viewDepartments = () => {
+    const queryDepartment = 'SELECT * FROM department';
+    con.query(queryDepartment, (err, result) => {
+      if (err) throw err;
+
+      console.table(result);
+      runSearch();
+    })
+  }
+
+  const viewRoles = () => {
+    const queryRoles = 'SELECT * FROM role';
+    con.query(queryRoles, (err, result) => {
+      if(err) throw err;
+      console.table(result);
+    })
+  }
+
+
+runSearch();
